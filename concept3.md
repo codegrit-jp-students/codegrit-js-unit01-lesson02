@@ -28,6 +28,8 @@ obj.color = 'yellow';
 console.log(obj.color);// yellowがアウトプットとして表示される
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/mjr1o5p9/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 上記では`obj.color`というプロパティにアクセスするためのドット「.」を含める、**_メンバーアクセス演算子_**という方法を用いました。
 この方法を用いることにより、プロパティ、つまり入れ物の箱であるオブジェクトの中身が何であるかを知ることができるのです。
 
@@ -66,14 +68,17 @@ console.log(obj1.name);
 console.log(obj1.nationality);
 ```
 
- `obj1` と `obj2` はオブジェクトに穀される内容、つまりプロパティが同じでも、オブジェクトとしては全く別のものとして認識されることに注意しましょう。
- その証拠が以下の検証結果です。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/dxshyvqp/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
- ```js
+`obj1` と `obj2` はオブジェクトに穀される内容、つまりプロパティが同じでも、オブジェクトとしては全く別のものとして認識されることに注意しましょう。その証拠が以下の検証結果です。
+
+```js
 console.log(obj1.name === obj2.name); // true
 console.log(obj1.nationality === obj2.nationality); // true
 console.log(obj1 === obj2); // false
- ```
+```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/g1Lfpkj0/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 プロパティである、`name`と`nationality`は`obj1`も`obj2`も同じプロパティですが、`obj1`と`obj2`は異なるオブジェクトなので、詳しくはレッスン3の演算子の内容で学びますが、 `===` は、同じオブジェクであるか、プリミティブ型で、データ型も値も同じであるかどうかの全てが厳密に比較されるので、異なるオブジェクトのobj1とobj2は`obj1 === obj2`で`false`となった訳です。
 
@@ -88,6 +93,8 @@ obj2.name = function() { return 'I\'m also Lisa, but a different one.' };
 console.log(obj1.name()); // I'm Lisa.
 console.log(obj2.name()); // I'm also Lisa but a different one.
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/ec049L5x/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 ### 配列(Array)
 
@@ -138,6 +145,8 @@ console.log(objArray[0].name); // Alex
 console.log(objArray[1].age); // 15
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/9fr5xh0d/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 特定要素にアクセスできることを利用して、以下のように特定の配列要素を書き換えることもできます。
 
 ```js
@@ -154,10 +163,11 @@ console.log(swapArray); // ['BMW', 'Mazda', 'Mercedes-Benz', 'Toyota']
 console.log(swapArray.length); // 4
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/L0oakph6/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 > ※　注意！
 >
 > 配列やオブジェクトの最終要素の後ろについている「,」は、データ交換で使用されるJSONでは禁止されていますが、配列やオブジェクトはInternet Explorerの古いバージョンを除いて「,」はエラーにならないのでつけても構いません。
-
 
 ### 日時(Date)
 
@@ -172,6 +182,9 @@ console.log(now); // Mon Apr 09 2018 23:55:53 GMT+0200 (CEST)
 
 // ただしアウトプットは処理系によって異なる
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/1as3rk6c/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 上記はメソッドを使用しない例です。
 それなりに整っているように上記では見えますが、これは処理系によるため、中には`2018-04-09T07:52:50.564Z`のようなアウトプット(これをISO表記と呼びます。)を返すものもあります。
 上記に比べると処理系が異なるだけでこんなに表示の仕方が変わるので、特に見辛い表記が返される処理系の場合は困りますよね。
@@ -185,6 +198,8 @@ console.log(now.getMonth()); // 月は0からカウントされるため4月で�
 console.log(now.getDate()); // 日も同様
 console.log(now.getDay()); // 曜日も0（日曜日）、1（月曜日）...となる
 ```
+
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/9corx5n2/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
 この他にも`getHours()`、`getMinutes()`、`getSeconds()`、`getMilliseconds()`といったメソッドがあります。
 `2018-04-09T07:52:50.564Z`のような表記よりは、0から曜日や月をカウントするとは言え、配列の特定要素へのアクセスと共通することなので、まだ私たちが普段馴染みある表記に近いアウトプットを返してくれます。

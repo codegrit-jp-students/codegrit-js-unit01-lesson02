@@ -19,6 +19,8 @@ console.log(a);
 0.30000000000000004
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/pg1y4w3n/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
 なぜでしょうか？
 実はJavaScriptで適用される数値の表現は、**IEEE 754-2008**という**倍精度浮動小数点数（64ビット）**の表現を使用するために、計算結果が上記のようになるケースもあります。
 
@@ -42,7 +44,9 @@ console.log(-1/0);// 計算結果 --> -Infinity（負の無限大）
 console.log(Infinity/Infinity);// 計算結果 --> NaN（Not a numberの略）
 ```
 
-計算結果としてこのような値が返ってくることもありますので、見慣れておくとよいでしょう。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/tx06g1d7/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+計算結果が思っていたものと違った場合、上記のように0で数値を割ってしまっている可能性を疑いましょう。
 
 ### 文字列(Strings)
 
@@ -54,69 +58,48 @@ console.log(Infinity/Infinity);// 計算結果 --> NaN（Not a numberの略）
 
 ```js
 const phrase = 'Hello, world!';
-console.log(phrase);// Hello, world! がアウトプットされる
+console.log(phrase); // Hello, world! がアウトプットされる
 ```
 
 しかし、引用符の「" "」や「' '」自体が文字列中に含まれている場合はどうなるのでしょうか？
 
-結論から言うと、そのまま書くとうまく反映されない場合とされる場合とがあります。
-うまく反映されない場合は、解決策として**エスケープ**を使います。
-
-まずはダブルクォートやシングルクォートが文字列に含まれていても、反映される例を見てみましょう。
+この場合、ダブルクォートで囲った文字列の中にシングルクォートを使ったり、シングルクォートで囲った文字列にダブルクォートを利用するのは問題ありません。
 
 ```js
 const longPhrase = 'When I say "Hello, world!" in this way, it works.';
-console.log(longPhrase);// When I say "Hello, world!" in this way, it works.がアウトプットされる
+console.log(longPhrase); // When I say "Hello, world!" in this way, it works.がアウトプットされる
 
 const sentence = "Even if I say 'Hello, world!' like this way, it also works.";
-console.log(sentence);// Even if I say 'Hello, world!' like this way, it also works.がアウトプットされる
+console.log(sentence); // Even if I say 'Hello, world!' like this way, it also works.がアウトプットされる
 ```
 
-つまり、一番外で囲んでいるシングルクォートかダブルクォートに、文字列内に含まれるシングルクォートかダブルクォートが隣合わない限りは反映されるので、**エスケープ**する必要はありません。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/k8wfadem/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
-今度は反映されない例を見てみましょう。
+しかし、ダブルクォートで囲った文の中にダブルクォートを入れてしまうとそこで一旦文字列が終わってしまいエラーが発生します。こうした時には、`バックスラッシュ(\)`を利用することで、ここで文字列は終わらないよ、とブラウザに教えてあげる必要があります。
+
+バックスラッシュはMacの場合は、**option + ¥**で入力出来ます。
 
 ```js
-const badPhrase = '"Hello, world!" to say like this is not going to work.';
-console.log(badPhrase);// undefined がアプトプットされる
-
-const badSentence = "Do you think this also works? 'Maybe, not.'";
-console.log(badSentence);// undefined がアプトプットされる
+const escapeEx = 'I\'m a computer engineer.';
+console.log(escapeEx);
 ```
 
-`undefined`になるため、この場合は**エスケープ**する必要があります。
-具体的には、**バックスラッシュ（\）**を入れます。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/8w7zt6a5/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
-Macだと、**option + ¥**のキーでバックスラッシュは表示できます。
+また、ES6では**バッククォート`**を利用して変数を埋め込んだ文字列を作成できるようになりました。バッククォートを用いた書き方のことを**_テンプレートリテラル_**と呼びます。
 
-実際に視覚的に見た方が、バックスラッシュの入れ方の理解も早いので、エスケープさせた例を見てみましょう。
+例えば以下の例を見てみましょう。
 
 ```js
-const goodPhrase = '\"Hello, world!\" to say like this is not going to work.';
-console.log(goodPhrase);// "Hello, world!" to say like this is not going to work.が反映される
+let currentRole = 'student';
+const phrase = `I'm a ${currentRole}.`;
 
-const goodSentence = "Do you think this also works? \'Maybe, not.\'";
-console.log(goodSentence);// Do you think this also works? 'Maybe, not.'が反映される
+console.log(phrase); // I'm a student.がアプトプットされる
 ```
 
-アポストロフィーにもエスケープは使用できます。
-必要に応じてエスケープを使用してみましょう。
+<iframe width="100%" height="300" src="//jsfiddle.net/codegrit_hiro/nf9rm3kp/1/embedded/js,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
 
-ここでは**エスケープ**を知っておくために解説してきましたが、ES6(ES2015) からは**_テンプレートリテラル_**と言う便利な方法が用意されていて、**バッククォート**を使用するとエスケープする必要がなくなります。
-
-一部のブラウザは、まだ現時点ではES6未対応ですので、知識としてエスケープも**_テンプレートリテラル_**と合わせて知っておきましょう。
-
-**_テンプレートリテラル_**はどちらかと言うと以下のような場合に活躍します。
-
-```js
-let currentStatus = 'student';
-const phrase = `I'm a ${currentStatus}.`;
-
-console.log(phrase);// I'm a student.がアプトプットされる
-```
-
-`${currentStatus}`は変数と呼ばれる値です。
-**_テンプレートリテラル_**では、文字列の中に上記のような変数を含めることができます。
+上記の例では、`currentRole`という変数を文字列に埋め込んでいます。
 
 上記と同一の内容を`'I\'m a ' + currentStatus`と書くことも出来ますが、テンプレートリテラルがより可読性が高いため、文字列と文字列を含む変数を結合したい場合、テンプレートリテラルを使うのが推奨です。
 
@@ -125,9 +108,6 @@ console.log(phrase);// I'm a student.がアプトプットされる
 ところで、数字を文字列で表示させたい場合はどうしたら良いのでしょうか？
 
 答えは非常に簡単で、シングルクォートやダブルクォートで囲まれた数字は文字列として認識されます。（※  厳密に言うと、認識される場合とされない場合とに分かれますが、データ型の変換と言う内容で詳細は学びます。）
-
-文字列は実践でもよく使用します。
-ここに挙げた基礎は、覚えておくと便利です。
 
 ### 論理値（真偽値、Boolean）
 
